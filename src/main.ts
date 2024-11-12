@@ -1,11 +1,22 @@
-import './assets/main.css'
-
 import { createApp } from 'vue'
 import App from './App.vue'
-import router from './router'
+import type { Router } from 'vue-router'
+import { createRouter, createWebHistory } from 'vue-router'
+import HomePage from './components/pages/HomePage.vue'
+import PortfolioPage from './components/pages/PortfolioPage.vue'
+import ContactPage from './components/pages/ContactPage.vue'
+import ServicesPage from './components/pages/ServicesPage.vue'
+import AboutPage from './components/pages/AboutPage.vue'
 
-const app = createApp(App)
+const router: Router = createRouter({
+  history: createWebHistory(),
+  routes: [
+    { path: '/', component: HomePage, name: 'Home' },
+    { path: '/portfolio', component: PortfolioPage, name: 'Portfolio' },
+    { path: '/contact', component: ContactPage, name: 'Contact' },
+    { path: '/services', component: ServicesPage, name: 'Services' },
+    { path: '/about', component: AboutPage, name: 'About' },
+  ],
+})
 
-app.use(router)
-
-app.mount('#app')
+createApp(App).use(router).mount('#app')
