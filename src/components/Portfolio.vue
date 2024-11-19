@@ -4,9 +4,16 @@ export default {
   data() {
     return {
       photos: [
-        { url: 'https://placehold.co/400', alt: 'Electrical panel installation' },
-        { url: 'https://placehold.co/400', alt: 'Lighting installation' },
-        { url: 'https://placehold.co/400', alt: 'Wiring installation' },
+        { url: 'https://placehold.co/300', alt: 'Electrical panel installation' },
+        { url: 'https://placehold.co/300', alt: 'Lighting installation' },
+        { url: 'https://placehold.co/300', alt: 'Wiring installation' },
+        { url: 'https://placehold.co/300', alt: 'Electrical panel installation' },
+        { url: 'https://placehold.co/300', alt: 'Lighting installation' },
+        { url: 'https://placehold.co/300', alt: 'Wiring installation' },
+        { url: 'https://placehold.co/300', alt: 'Electrical panel installation' },
+        { url: 'https://placehold.co/300', alt: 'Lighting installation' },
+        { url: 'https://placehold.co/300', alt: 'Wiring installation' },
+        { url: 'https://placehold.co/300', alt: 'Electrical panel installation' },
       ],
     }
   },
@@ -41,6 +48,7 @@ export default {
 
 .gallery {
   display: flex;
+  justify-content: center;
   flex-wrap: wrap;
   gap: 1rem;
 }
