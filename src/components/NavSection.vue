@@ -28,10 +28,9 @@ export default {
   margin: 0;
   padding: 0;
   display: flex;
-}
-
-.navbar-item {
-  padding: 14px 20px;
+  justify-content: space-evenly;
+  align-items: center;
+  height: 100%;
 }
 
 .navbar-item a {
