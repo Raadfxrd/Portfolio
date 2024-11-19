@@ -56,19 +56,6 @@ export default {
         ensure long-lasting solutions. Every project is thoroughly inspected and tested to meet the
         <strong>highest industry standards</strong>.
       </p>
-
-      <p>
-        <strong>The De Elektraman Difference:</strong> Our mission is simple: to provide safe,
-        efficient, and innovative electrical solutions tailored to your needs. We understand that
-        every project is unique, which is why we take the time to listen, assess, and deliver a
-        customized solution that fits your requirements and budget.
-      </p>
-
-      <p>At De Elektraman:</p>
-      <ul>
-        <li><em>You're not just a customer; you're part of our family.</em></li>
-        <li><em>We don't just fix problems; we create lasting solutions.</em></li>
-      </ul>
     </div>
   </section>
 </template>
@@ -82,5 +69,69 @@ export default {
   padding: 0 var(--page-padding);
   position: relative;
   z-index: 0;
+}
+
+.about h1 {
+  margin-bottom: 20px;
+  text-align: center;
+  width: 100%;
+}
+
+.about-p {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.about-p p {
+  margin-bottom: 20px;
+  line-height: 1.6;
+}
+
+.about-p ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+.about-p ul li {
+  margin-bottom: 10px;
+  line-height: 1.6;
+}
+
+@media (max-width: 768px) {
+  .about {
+    padding: 15px;
+  }
+
+  .about h1 {
+    font-size: 1.5rem;
+  }
+
+  .about-p {
+    padding: 0 10px;
+  }
+
+  .about-p p,
+  .about-p ul li {
+    font-size: 0.875rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .about {
+    padding: 10px;
+  }
+
+  .about h1 {
+    font-size: 1.25rem;
+  }
+
+  .about-p {
+    padding: 0 5px;
+  }
+
+  .about-p p,
+  .about-p ul li {
+    font-size: 0.75rem;
+  }
 }
 </style>
