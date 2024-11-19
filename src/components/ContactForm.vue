@@ -125,7 +125,7 @@ form {
   display: grid;
   grid-template-columns: 1fr;
   gap: 10px;
-  max-width: 500px;
+  max-width: 800px;
   margin: 0 auto;
 }
 </style>
