@@ -1,27 +1,3 @@
-<template>
-  <nav class="navbar">
-    <button class="hamburger" @click="toggleMenu">
-      <svg
-        :class="['hamburger-svg', { 'is-active': isMenuOpen }]"
-        viewBox="0 0 100 100"
-        width="30"
-        height="30"
-      >
-        <path class="line line1" d="M 20,29 H 80" />
-        <path class="line line2" d="M 20,50 H 80" />
-        <path class="line line3" d="M 20,71 H 80" />
-      </svg>
-    </button>
-    <ul :class="['navbar-list', { 'navbar-list--open': isMenuOpen }]">
-      <li class="navbar-item"><router-link to="/">Home</router-link></li>
-      <li class="navbar-item"><router-link to="/about">About</router-link></li>
-      <li class="navbar-item"><router-link to="/services">Services</router-link></li>
-      <li class="navbar-item"><router-link to="/contact">Contact</router-link></li>
-      <li class="navbar-item"><router-link to="/portfolio">Portfolio</router-link></li>
-    </ul>
-  </nav>
-</template>
-
 <script lang="ts">
 export default {
   name: 'NavSection',
@@ -42,9 +18,45 @@ export default {
         document.body.style.overflow = 'auto'
       }
     },
+    closeMenu() {
+      this.isMenuOpen = false
+      document.body.style.overflow = 'auto'
+    },
   },
 }
 </script>
+
+<template>
+  <nav class="navbar">
+    <button class="hamburger" @click="toggleMenu">
+      <svg
+        :class="['hamburger-svg', { 'is-active': isMenuOpen }]"
+        viewBox="0 0 100 100"
+        width="30"
+        height="30"
+      >
+        <path class="line line1" d="M 20,29 H 80" />
+        <path class="line line2" d="M 20,50 H 80" />
+        <path class="line line3" d="M 20,71 H 80" />
+      </svg>
+    </button>
+    <ul :class="['navbar-list', { 'navbar-list--open': isMenuOpen }]">
+      <li class="navbar-item"><router-link to="/" @click.native="closeMenu">Home</router-link></li>
+      <li class="navbar-item">
+        <router-link to="/about" @click.native="closeMenu">About</router-link>
+      </li>
+      <li class="navbar-item">
+        <router-link to="/services" @click.native="closeMenu">Services</router-link>
+      </li>
+      <li class="navbar-item">
+        <router-link to="/contact" @click.native="closeMenu">Contact</router-link>
+      </li>
+      <li class="navbar-item">
+        <router-link to="/portfolio" @click.native="closeMenu">Portfolio</router-link>
+      </li>
+    </ul>
+  </nav>
+</template>
 
 <style scoped>
 .navbar {
