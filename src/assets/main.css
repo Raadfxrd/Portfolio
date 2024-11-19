@@ -17,7 +17,7 @@ body {
   color: var(--light-primary);
   letter-spacing: 1px;
   font: var(--font);
-  height: auto;
+  overflow: auto;
 }
 
 button {
