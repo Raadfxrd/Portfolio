@@ -38,8 +38,13 @@ export default {
 
 <style scoped>
 .contact-form {
-  padding: 2rem;
-  max-width: 600px;
-  margin: auto;
+  min-height: calc(100vh - 100px);
+  object-fit: cover;
+  background-color: var(--dark-primary);
+  color: var(--light-primary);
+  padding: 0 var(--page-padding);
+  position: relative;
+  z-index: 0;
+  text-align: center;
 }
 </style>

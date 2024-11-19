@@ -1,5 +1,63 @@
 :root {
-  --color-primary: #ff0000;
-  --color-secondary: #00ff00;
-  --color-tertiary: #0000ff;
+  --dark-primary: #2e2e2e;
+  --dark-secondary: #3a3a3a;
+  --light-primary: #ececec;
+  --light-secondary: #f5f5f5;
+  --button-important: #e74c3c;
+  --button-important-hover: #800000;
+  --button: #20638f;
+  --animation-duration: 0.3s;
+  --page-padding: 128px;
+  font-family: 'Raleway', sans-serif;
+}
+
+body {
+  font-weight: normal;
+  background-color: var(--light-primary);
+  color: var(--light-primary);
+  letter-spacing: 1px;
+}
+
+h1 {
+  font-size: 38px;
+  line-height: 1.2;
+  font-weight: normal;
+  padding-bottom: 10px !important;
+  padding-top: 30px !important;
+  width: fit-content;
+}
+
+h2 {
+  font-size: 26px;
+  font-weight: normal;
+  padding-bottom: 10px !important;
+  padding-top: 30px !important;
+}
+
+h3 {
+  font-size: 22px;
+  font-weight: normal;
+  padding-bottom: 10px !important;
+  padding-top: 30px !important;
+}
+
+p {
+  font-size: 16px;
+  font-weight: normal;
+  text-align: justify;
+  padding-bottom: 20px !important;
+}
+
+a {
+  font-size: 16px;
+  cursor: pointer;
+  text-decoration: none;
+  color: white;
+  text-align: justify;
+  font-weight: normal;
+  position: relative;
+}
+
+strong {
+  font-weight: bold;
 }

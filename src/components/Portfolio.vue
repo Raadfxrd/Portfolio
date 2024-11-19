@@ -4,8 +4,9 @@ export default {
   data() {
     return {
       photos: [
-        { url: 'path/to/photo1.jpg', alt: 'Electrical panel installation' },
-        { url: 'path/to/photo2.jpg', alt: 'Lighting installation' },
+        { url: 'https://placehold.co/400', alt: 'Electrical panel installation' },
+        { url: 'https://placehold.co/400', alt: 'Lighting installation' },
+        { url: 'https://placehold.co/400', alt: 'Wiring installation' },
       ],
     }
   },
@@ -25,15 +26,25 @@ export default {
 
 <style scoped>
 .portfolio {
+  min-height: calc(100vh - 100px);
+  object-fit: cover;
+  background-color: var(--dark-primary);
+  color: var(--light-primary);
+  padding: 0 var(--page-padding);
+  position: relative;
+  z-index: 0;
+  text-align: center;
   display: flex;
   flex-direction: column;
   align-items: center;
 }
+
 .gallery {
   display: flex;
   flex-wrap: wrap;
   gap: 1rem;
 }
+
 .gallery-item img {
   width: 100%;
   height: auto;

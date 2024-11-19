@@ -6,22 +6,17 @@ export default {
 
 <template>
   <footer class="footer">
-    <div class="container">
-      <p>&copy; 2023 Your Company. All rights reserved.</p>
-    </div>
+    <p>&copy; 2024 De Elektraman. Alle rechten voorbehouden.</p>
   </footer>
 </template>
 
 <style scoped>
 .footer {
-  background-color: #333;
-  color: #fff;
-  padding: 20px 0;
+  background-color: var(--dark-secondary);
+  height: 50px;
   text-align: center;
-}
-
-.container {
-  max-width: 1200px;
-  margin: 0 auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 </style>
