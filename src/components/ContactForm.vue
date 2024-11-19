@@ -102,7 +102,7 @@ export default defineComponent({
         required
       ></textarea>
 
-      <button type="submit" :disabled="isSubmitting">
+      <button class="submitbutton" type="submit" :disabled="isSubmitting">
         {{ isSubmitting ? 'Sending...' : 'Send' }}
       </button>
     </form>
@@ -127,5 +127,20 @@ form {
   gap: 10px;
   max-width: 800px;
   margin: 0 auto;
+}
+
+.submitbutton {
+  background-color: var(--light-primary);
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: background-color 0.3s;
+  margin-bottom: 30px;
+}
+
+.submitbutton:hover {
+  background-color: var(--light-secondary);
 }
 </style>
