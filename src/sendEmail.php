@@ -8,8 +8,8 @@ error_reporting(E_ALL);
 ini_set('display_errors', 1);
 
 // Load environment variables from .env file
-require __DIR__ . '/vendor/autoload.php';
-$dotenv = Dotenv::createImmutable(__DIR__);
+require __DIR__ . '/phpmailer/vendor/autoload.php';
+$dotenv = Dotenv::createImmutable(__DIR__ . '/');
 $dotenv->load();
 
 // Update the paths to the PHPMailer files
@@ -26,8 +26,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $email = isset($data['email']) ? htmlspecialchars($data['email']) : null;
     $phone = isset($data['phone']) ? htmlspecialchars($data['phone']) : null;
     $message = isset($data['message']) ? htmlspecialchars($data['message']) : null;
+    $includePhone = isset($data['includePhone']) ? filter_var($data['includePhone'], FILTER_VALIDATE_BOOLEAN) : false;
 
-    if (!$name || !$email || !$phone || !$message) {
+    if (!$name || !$email || !$message || ($includePhone && !$phone)) {
         echo json_encode(["status" => "error", "message" => "All fields are required."]);
         exit;
     }
@@ -54,9 +55,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $mail->Subject = "Contact Form Submission from $name";
         $mail->Body = "<h2>Nieuw bericht!</h2>
             <p><strong>Name:</strong> $name</p>
-            <p><strong>Email:</strong> $email</p>
-            <p><strong>Phone number:</strong> $phone</p>
-            <p><strong>Message:</strong></p>
+            <p><strong>Email:</strong> $email</p>" .
+            ($includePhone ? "<p><strong>Phone number:</strong> $phone</p>" : "") .
+            "<p><strong>Message:</strong></p>
             <p>$message</p>
             <hr>
             <p>This email was sent from the contact form on De Elektraman website.</p>";
@@ -64,6 +65,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $mail->send();
         echo json_encode(["status" => "success", "message" => "Email sent successfully."]);
     } catch (Exception $e) {
-        echo json_encode(["status" => "error", "message" => "Email could not be sent. Mailer Error: {$mail->ErrorInfo}"]);
+        echo json_encode(["status" => "error", "message" => "Failed to send email. Mailer Error: {$mail->ErrorInfo}"]);
     }
+} else {
+    echo json_encode(["status" => "error", "message" => "Invalid request method."]);
 }
