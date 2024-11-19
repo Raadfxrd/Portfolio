@@ -37,9 +37,9 @@ export default {
     },
     toggleBodyClass() {
       if (this.isMenuOpen) {
-        document.body.classList.add('no-scroll')
+        document.body.style.overflow = 'hidden'
       } else {
-        document.body.classList.remove('no-scroll')
+        document.body.style.overflow = 'auto'
       }
     },
   },
@@ -104,6 +104,7 @@ export default {
   justify-content: space-evenly;
   align-items: center;
   height: 100%;
+  width: 100%;
 }
 
 .navbar-list--open {
@@ -115,6 +116,7 @@ export default {
   width: 100%;
   background-color: var(--dark-secondary);
   z-index: 1;
+  height: calc(100vh - 50px);
 }
 
 .navbar-item a {
@@ -159,10 +161,10 @@ export default {
   .hamburger {
     display: flex;
   }
-}
 
-.no-scroll {
-  overflow: hidden;
-  height: 100%;
+  .body-change {
+    overflow: hidden;
+    height: calc(100vh - 50px);
+  }
 }
 </style>
