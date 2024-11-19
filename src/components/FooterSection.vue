@@ -6,7 +6,7 @@ export default {
 
 <template>
   <footer class="footer">
-    <p>&copy; 2024 De Elektraman. Alle rechten voorbehouden.</p>
+    <p class="footer-text">&copy; 2024 De Elektraman. Alle rechten voorbehouden.</p>
   </footer>
 </template>
 
@@ -18,5 +18,9 @@ export default {
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+.footer-text {
+  padding-bottom: 0 !important;
 }
 </style>
