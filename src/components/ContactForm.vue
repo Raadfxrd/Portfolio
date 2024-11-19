@@ -23,13 +23,24 @@ export default {
     <h2>Contact Us</h2>
     <form @submit.prevent="handleSubmit">
       <label for="name">Name</label>
-      <input type="text" id="name" v-model="form.name" required />
+      <input type="text" id="name" placeholder="Voornaam Achternaam" v-model="form.name" required />
 
       <label for="email">Email</label>
-      <input type="email" id="email" v-model="form.email" required />
+      <input
+        type="email"
+        id="email"
+        placeholder="voornaam@email.nl"
+        v-model="form.email"
+        required
+      />
 
       <label for="message">Message</label>
-      <textarea id="message" v-model="form.message" required></textarea>
+      <textarea
+        id="message"
+        placeholder="Je bericht aan mij..."
+        v-model="form.message"
+        required
+      ></textarea>
 
       <button type="submit">Send</button>
     </form>
@@ -46,5 +57,13 @@ export default {
   position: relative;
   z-index: 0;
   text-align: center;
+}
+
+form {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 10px;
+  max-width: 500px;
+  margin: 0 auto;
 }
 </style>
