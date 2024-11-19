@@ -1,10 +1,16 @@
 <?php
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
+use Dotenv\Dotenv;
 
 // Enable error reporting for debugging
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
+
+// Load environment variables from .env file
+require __DIR__ . '/vendor/autoload.php';
+$dotenv = Dotenv::createImmutable(__DIR__);
+$dotenv->load();
 
 // Update the paths to the PHPMailer files
 require __DIR__ . '/phpmailer/vendor/phpmailer/phpmailer/src/Exception.php';
@@ -30,19 +36,19 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     try {
         $mail->isSMTP();
-        $mail->Host = 'smtp.strato.com'; 
+        $mail->Host = $_ENV['SMTP_HOST']; 
         $mail->SMTPAuth = true;
-        $mail->Username = 'sandro@deelektraman.com'; 
-        $mail->Password = 'Koniara11!!';
+        $mail->Username = $_ENV['SMTP_USERNAME']; 
+        $mail->Password = $_ENV['SMTP_PASSWORD'];
         $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
-        $mail->Port = 587;
+        $mail->Port = $_ENV['SMTP_PORT'];
 
         // Set the From address to an authorized email address
-        $mail->setFrom('sandro@deelektraman.com', 'De Elektraman');
+        $mail->setFrom($_ENV['SMTP_USERNAME'], 'De Elektraman');
         // Set the Reply-To address to the user's email address
         $mail->addReplyTo($email, $name);
         // Add the recipient address
-        $mail->addAddress('sandro@deelektraman.com');
+        $mail->addAddress($_ENV['SMTP_USERNAME']);
 
         $mail->isHTML(true);
         $mail->Subject = "Contact Form Submission from $name";
@@ -58,10 +64,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $mail->send();
         echo json_encode(["status" => "success", "message" => "Email sent successfully."]);
     } catch (Exception $e) {
-        echo json_encode(["status" => "error", "message" => "Failed to send email. Mailer Error: {$mail->ErrorInfo}"]);
+        echo json_encode(["status" => "error", "message" => "Email could not be sent. Mailer Error: {$mail->ErrorInfo}"]);
     }
-} else {
-    echo json_encode(["status" => "error", "message" => "Invalid request method."]);
 }
-
-?>
