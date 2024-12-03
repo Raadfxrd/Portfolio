@@ -1,104 +1,42 @@
 :root {
-  --dark-primary: #2e2e2e;
-  --dark-secondary: #3a3a3a;
-  --light-primary: #eaeaea;
-  --light-secondary: #c0c0c0;
-  --button-important: #e74c3c;
-  --button-important-hover: #800000;
-  --button: #20638f;
-  --animation-duration: 0.3s;
-  --page-padding: 128px;
-  --font: 16px 'Raleway', sans-serif;
+  --color-primary-dark: #132534;
+  --color-primary-light: #faa2a2;
+  --color-secondary-light: #6eb1e7;
+  --font: 'Iosevka', monospace;
 }
 
 body {
-  font-weight: normal;
-  background-color: var(--light-primary);
-  color: var(--light-primary);
-  letter-spacing: 1px;
-  font: var(--font);
-  overflow: auto;
-}
-
-button {
-  padding: 10px 20px;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  font: var(--font);
+  font-family: var(--font);
+  background-color: var(--color-primary-dark);
+  color: var(--color-primary-light);
 }
 
 h1 {
-  font-size: 38px;
-  line-height: 1.2;
-  font-weight: normal;
-  padding-bottom: 10px !important;
-  padding-top: 30px !important;
-  width: fit-content;
+  font-size: 2.5rem;
+  color: var(--color-secondary-light);
 }
 
 h2 {
-  font-size: 26px;
-  font-weight: normal;
-  padding-bottom: 10px !important;
-  padding-top: 30px !important;
+  font-size: 2rem;
+  color: var(--color-secondary-light);
 }
 
 h3 {
-  font-size: 22px;
-  font-weight: normal;
-  padding-bottom: 10px !important;
-  padding-top: 30px !important;
-}
-
-p {
-  font-size: 16px;
-  font-weight: normal;
-  text-align: justify;
-  padding-bottom: 20px !important;
-}
-
-a {
-  font-size: 16px;
-  cursor: pointer;
-  text-decoration: none;
-  color: white;
-  text-align: justify;
-  font-weight: normal;
-  position: relative;
+  font-size: 1.8rem;
+  color: var(--color-secondary-light);
 }
 
 strong {
+  color: var(--color-secondary-light);
   font-weight: bold;
 }
 
-form {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  width: 100%;
-  font: var(--font);
+p {
+  font-size: 1.2rem;
 }
 
-label {
-  display: block;
-  text-align: left;
-  margin-top: 16px !important;
-  margin-bottom: 0 !important;
-}
-
-input,
-select {
-  padding: 10px;
-  border: none;
-  border-radius: 5px;
-  font: var(--font);
-}
-
-textarea {
-  resize: none;
-  margin: 0;
-  height: 100px;
-  font: var(--font);
+a {
+  color: var(--color-primary-light);
+  text-decoration: none;
+  font-size: 1.2rem;
 }
