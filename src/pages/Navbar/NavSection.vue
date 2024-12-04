@@ -1,7 +1,7 @@
 <template>
   <nav>
-    <div class="logo">
-      <span class="logo-r" @click="toggleLogo">R</span>
+    <div class="logo" @click="toggleLogo">
+      <span class="logo-r">R</span>
       <span class="logo-rest" :class="{ hidden: !isHidden }">aadfxrd</span>
     </div>
     <div class="nav-buttons">
@@ -54,6 +54,7 @@ nav {
     opacity 0.3s ease;
   transform: translateX(-100%);
   opacity: 0;
+  font-size: 2rem;
 }
 
 .logo-rest.hidden {
