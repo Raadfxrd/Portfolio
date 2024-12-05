@@ -5,8 +5,13 @@
         {{ displayedGreeting }}
       </h3>
       <h1 class="welcome-personal">I'm Raadfxrd.</h1>
-      <h3 class="welcome-rotating">Full-Stack developer,</h3>
-      <h3 class="welcome-slogan">innovating for mine and your success.</h3>
+      <h3
+        class="welcome-rotating"
+        :class="{ slideUpOut: isTitleSlidingOut, slideUpIn: isTitleSlidingIn }"
+      >
+        {{ currentTitle }}
+      </h3>
+      <h3 class="welcome-slogan">Innovating for our success.</h3>
     </div>
     <div class="welcome-img">
       <img class="raadfxrd" src="../../../assets/img/raadfxrd.jpeg" alt="Raadfxrd" />
@@ -23,6 +28,17 @@ export default {
       fullGreeting: '',
       isSlidingOut: false,
       isSlidingIn: false,
+      titles: [
+        'Frontend Developer,',
+        'Full-Stack Developer,',
+        'Web Developer,',
+        'Software Engineer,',
+        'Creative Technologist,',
+      ],
+      currentTitleIndex: 0,
+      currentTitle: '',
+      isTitleSlidingOut: false,
+      isTitleSlidingIn: false,
     }
   },
   computed: {
@@ -48,6 +64,8 @@ export default {
     this.fullGreeting = this.greeting
     this.displayedGreeting = this.greeting
     this.startGreetingUpdater()
+    this.currentTitle = this.titles[this.currentTitleIndex]
+    this.startTitleRotation()
   },
   methods: {
     startGreetingUpdater() {
@@ -61,13 +79,36 @@ export default {
         this.isSlidingOut = false
         this.displayedGreeting = this.fullGreeting
         this.slideInGreeting()
-      }, 500) // Duration of the slide-out animation
+      }, 500)
     },
     slideInGreeting() {
       this.isSlidingIn = true
       setTimeout(() => {
         this.isSlidingIn = false
-      }, 500) // Duration of the slide-in animation
+      }, 500)
+    },
+    startTitleRotation() {
+      setInterval(() => {
+        this.slideUpTitle()
+      }, 3000)
+    },
+    slideUpTitle() {
+      this.isTitleSlidingOut = true
+      setTimeout(() => {
+        this.isTitleSlidingOut = false
+        this.updateTitle()
+        this.slideDownTitle()
+      }, 500)
+    },
+    slideDownTitle() {
+      this.isTitleSlidingIn = true
+      setTimeout(() => {
+        this.isTitleSlidingIn = false
+      }, 500)
+    },
+    updateTitle() {
+      this.currentTitleIndex = (this.currentTitleIndex + 1) % this.titles.length
+      this.currentTitle = this.titles[this.currentTitleIndex]
     },
   },
 }
@@ -101,9 +142,6 @@ export default {
   color: var(--color-primary-light);
   white-space: nowrap;
   opacity: 1;
-  transition:
-    opacity 0.5s,
-    transform 0.5s;
 }
 
 .welcome-gm-ga-ge.slideOut {
@@ -125,10 +163,19 @@ export default {
 }
 
 .welcome-rotating {
+  color: var(--color-secondary-light);
   opacity: 0;
   animation:
-    fadeIn 1s forwards 1.5s,
-    slideUp 1s forwards 1.5s;
+    fadeIn 1s forwards 1s,
+    slideUp 1s forwards 1s;
+}
+
+.welcome-rotating.slideUpOut {
+  animation: slideTitleUpOut 0.5s forwards;
+}
+
+.welcome-rotating.slideUpIn {
+  animation: slideTitleUpIn 0.5s forwards;
 }
 
 .welcome-slogan {
@@ -148,7 +195,7 @@ export default {
   opacity: 0;
   animation:
     fadeIn 1s forwards 1s,
-    slideUp 1s forwards 1s; /* Match the delay with welcome-personal */
+    slideUp 1s forwards 1s;
 }
 
 .raadfxrd {
@@ -177,22 +224,44 @@ export default {
 @keyframes slideOut {
   from {
     opacity: 1;
-    transform: translateX(0);
+    transform: translateY(0);
   }
   to {
     opacity: 0;
-    transform: translateX(-100%);
+    transform: translateY(-100%);
   }
 }
 
 @keyframes slideIn {
   from {
     opacity: 0;
-    transform: translateX(100%);
+    transform: translateY(100%);
   }
   to {
     opacity: 1;
-    transform: translateX(0);
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideTitleUpOut {
+  from {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  to {
+    opacity: 0;
+    transform: translateY(-100%);
+  }
+}
+
+@keyframes slideTitleUpIn {
+  from {
+    opacity: 0;
+    transform: translateY(100%);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
   }
 }
 </style>
