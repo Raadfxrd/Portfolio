@@ -1,7 +1,9 @@
 <template>
   <section class="welcome">
     <div class="welcome-text">
-      <h3 class="welcome-gm-ga-ge">{{ greeting }}</h3>
+      <h3 class="welcome-gm-ga-ge" :class="{ slideOut: isSlidingOut, slideIn: isSlidingIn }">
+        {{ displayedGreeting }}
+      </h3>
       <h1 class="welcome-personal">I'm Raadfxrd.</h1>
       <h3 class="welcome-rotating">Full-Stack developer,</h3>
       <h3 class="welcome-slogan">innovating for mine and your success.</h3>
@@ -19,6 +21,8 @@ export default {
     return {
       displayedGreeting: '',
       fullGreeting: '',
+      isSlidingOut: false,
+      isSlidingIn: false,
     }
   },
   computed: {
@@ -36,14 +40,35 @@ export default {
   watch: {
     greeting(newVal, oldVal) {
       if (newVal !== oldVal) {
-        this.fullGreeting = newVal
-        this.displayedGreeting = newVal
+        this.slideOutGreeting()
       }
     },
   },
   mounted() {
     this.fullGreeting = this.greeting
     this.displayedGreeting = this.greeting
+    this.startGreetingUpdater()
+  },
+  methods: {
+    startGreetingUpdater() {
+      setInterval(() => {
+        this.fullGreeting = this.greeting
+      }, 60000) // Check every minute
+    },
+    slideOutGreeting() {
+      this.isSlidingOut = true
+      setTimeout(() => {
+        this.isSlidingOut = false
+        this.displayedGreeting = this.fullGreeting
+        this.slideInGreeting()
+      }, 500) // Duration of the slide-out animation
+    },
+    slideInGreeting() {
+      this.isSlidingIn = true
+      setTimeout(() => {
+        this.isSlidingIn = false
+      }, 500) // Duration of the slide-in animation
+    },
   },
 }
 </script>
@@ -75,10 +100,18 @@ export default {
 .welcome-gm-ga-ge {
   color: var(--color-primary-light);
   white-space: nowrap;
-  opacity: 0;
-  animation:
-    fadeIn 1s forwards 0.5s,
-    slideUp 1s forwards 0.5s;
+  opacity: 1;
+  transition:
+    opacity 0.5s,
+    transform 0.5s;
+}
+
+.welcome-gm-ga-ge.slideOut {
+  animation: slideOut 0.5s forwards;
+}
+
+.welcome-gm-ga-ge.slideIn {
+  animation: slideIn 0.5s forwards;
 }
 
 .welcome-personal {
@@ -115,7 +148,7 @@ export default {
   opacity: 0;
   animation:
     fadeIn 1s forwards 1s,
-    slideUp 1s forwards 1s;
+    slideUp 1s forwards 1s; /* Match the delay with welcome-personal */
 }
 
 .raadfxrd {
@@ -138,6 +171,28 @@ export default {
   }
   to {
     transform: translateY(0);
+  }
+}
+
+@keyframes slideOut {
+  from {
+    opacity: 1;
+    transform: translateX(0);
+  }
+  to {
+    opacity: 0;
+    transform: translateX(-100%);
+  }
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateX(100%);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
   }
 }
 </style>
