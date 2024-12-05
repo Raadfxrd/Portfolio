@@ -33,7 +33,7 @@ nav {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 2rem;
+  padding: 2rem 2rem 0 2rem;
 }
 
 .logo {

@@ -13,7 +13,7 @@ body {
 
 h1 {
   font-size: 2.5rem;
-  color: var(--color-secondary-light);
+  color: var(--color-primary-light);
 }
 
 h2 {
@@ -22,7 +22,7 @@ h2 {
 }
 
 h3 {
-  font-size: 1.8rem;
+  font-size: 1.5rem;
   color: var(--color-secondary-light);
 }
 
