@@ -14,19 +14,37 @@
           <img class="raadfxrd" src="../../../assets/img/raadfxrd.jpeg" alt="Raadfxrd" />
         </div>
       </div>
-      <div class="tech-stack">
-        <i class="devicon-html5-plain" title="HTML5"></i>
-        <i class="devicon-css3-plain" title="CSS3"></i>
-        <i class="devicon-javascript-plain" title="JavaScript"></i>
-        <i class="devicon-typescript-plain" title="TypeScript"></i>
-        <i class="devicon-nodejs-plain" title="Node.js"></i>
-        <i class="devicon-mysql-plain" title="MySQL"></i>
-        <i class="devicon-github-original" title="GitHub"></i>
-        <i class="devicon-gitlab-plain" title="GitLab"></i>
-        <i class="devicon-figma-plain" title="Figma"></i>
-        <i class="devicon-photoshop-plain" title="Adobe Photoshop"></i>
-        <i class="devicon-aftereffects-plain" title="Adobe After Effects"></i>
-        <i class="devicon-premierepro-plain" title="Adobe Premiere Pro"></i>
+      <div class="tech-stack-container">
+        <div class="tech-stack">
+          <div class="tech-group">
+            <i class="devicon-html5-plain" title="HTML5"></i>
+            <i class="devicon-css3-plain" title="CSS3"></i>
+            <i class="devicon-javascript-plain" title="JavaScript"></i>
+            <i class="devicon-typescript-plain" title="TypeScript"></i>
+            <i class="devicon-nodejs-plain" title="Node.js"></i>
+            <i class="devicon-mysql-plain" title="MySQL"></i>
+            <i class="devicon-github-original" title="GitHub"></i>
+            <i class="devicon-gitlab-plain" title="GitLab"></i>
+            <i class="devicon-figma-plain" title="Figma"></i>
+            <i class="devicon-photoshop-plain" title="Adobe Photoshop"></i>
+            <i class="devicon-aftereffects-plain" title="Adobe After Effects"></i>
+            <i class="devicon-premierepro-plain" title="Adobe Premiere Pro"></i>
+          </div>
+          <div class="tech-group">
+            <i class="devicon-html5-plain" title="HTML5"></i>
+            <i class="devicon-css3-plain" title="CSS3"></i>
+            <i class="devicon-javascript-plain" title="JavaScript"></i>
+            <i class="devicon-typescript-plain" title="TypeScript"></i>
+            <i class="devicon-nodejs-plain" title="Node.js"></i>
+            <i class="devicon-mysql-plain" title="MySQL"></i>
+            <i class="devicon-github-original" title="GitHub"></i>
+            <i class="devicon-gitlab-plain" title="GitLab"></i>
+            <i class="devicon-figma-plain" title="Figma"></i>
+            <i class="devicon-photoshop-plain" title="Adobe Photoshop"></i>
+            <i class="devicon-aftereffects-plain" title="Adobe After Effects"></i>
+            <i class="devicon-premierepro-plain" title="Adobe Premiere Pro"></i>
+          </div>
+        </div>
       </div>
     </div>
   </section>
@@ -92,10 +110,6 @@ onMounted(() => {
   animation-delay: 0.5s;
 }
 
-.welcome-slogan {
-  animation-delay: 1s;
-}
-
 .welcome-img {
   height: 30rem;
   width: 30rem;
@@ -106,6 +120,10 @@ onMounted(() => {
   animation: fadeIn 1s forwards 1.5s;
 }
 
+.welcome-slogan {
+  animation-delay: 1s;
+}
+
 .raadfxrd {
   height: 100%;
   width: 100%;
@@ -114,25 +132,57 @@ onMounted(() => {
   filter: grayscale(100%);
 }
 
+.tech-stack-container {
+  width: 40%;
+  overflow: hidden;
+  border-radius: 8px;
+  margin: 2rem auto;
+  padding: 1.5rem 0;
+  position: relative;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Left fade mask */
+.tech-stack-container::before,
+.tech-stack-container::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  width: 150px;
+  height: 100%;
+  z-index: 2;
+}
+
 .tech-stack {
   display: flex;
-  gap: 1rem;
-  justify-content: center;
+  width: max-content;
+  animation: scroll 40s linear infinite;
+}
+
+@keyframes scroll {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+.tech-group {
+  display: flex;
+  gap: 3rem;
+  padding: 0 1.5rem;
   align-items: center;
-  margin-top: 2rem;
-  padding: 1rem 2rem;
-  width: 100%;
-  background: rgba(255, 255, 255, 0.05);
-  border-radius: 8px;
 }
 
 .tech-stack i {
   font-size: 2.5rem;
-  transition: transform 0.2s ease-in-out;
+  transition: all 0.3s ease;
 }
 
 .tech-stack i:hover {
   transform: scale(1.2);
+  filter: brightness(1.2);
 }
 
 .welcome-rotating.fadeOut {
@@ -141,6 +191,44 @@ onMounted(() => {
 
 .welcome-rotating.fadeIn {
   animation: fadeIn 0.5s forwards;
+}
+
+/* Tech Stack Icons color overrides */
+.devicon-html5-plain {
+  color: #e34f26;
+}
+.devicon-css3-plain {
+  color: #1572b6;
+}
+.devicon-javascript-plain {
+  color: #f7df1e;
+}
+.devicon-typescript-plain {
+  color: #3178c6;
+}
+.devicon-nodejs-plain {
+  color: #339933;
+}
+.devicon-mysql-plain {
+  color: #4479a1;
+}
+.devicon-github-original {
+  color: #181717;
+}
+.devicon-gitlab-plain {
+  color: #fc6d26;
+}
+.devicon-figma-plain {
+  color: #f24e1e;
+}
+.devicon-photoshop-plain {
+  color: #31a8ff;
+}
+.devicon-aftereffects-plain {
+  color: #9999ff;
+}
+.devicon-premierepro-plain {
+  color: #9999ff;
 }
 
 @keyframes fadeIn {
