@@ -5,7 +5,7 @@
       <span class="logo-rest" :class="{ hidden: !isHidden }">aadfxrd</span>
     </div>
     <div class="nav-buttons">
-      <a> About </a>
+      <a @click="scrollToSection('about')"> About </a>
       <a> Projects </a>
       <a> Contact </a>
     </div>
@@ -23,6 +23,12 @@ export default {
   methods: {
     toggleLogo() {
       this.isHidden = !this.isHidden
+    },
+    scrollToSection(sectionClass: string) {
+      const element = document.querySelector(`.${sectionClass}`)
+      if (element) {
+        element.scrollIntoView({ behavior: 'smooth' })
+      }
     },
   },
 }
