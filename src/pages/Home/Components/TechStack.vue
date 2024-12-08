@@ -19,7 +19,7 @@ const { techStack } = useTechStack()
 
 <style scoped>
 .tech-stack-container {
-  width: 40%;
+  width: 45%;
   overflow: hidden;
   border-radius: 8px;
   margin: 2rem auto;

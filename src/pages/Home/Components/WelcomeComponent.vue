@@ -49,7 +49,7 @@ onMounted(() => {
   justify-content: center;
   align-items: center;
   flex-direction: row;
-  gap: 2rem;
+  gap: 3rem;
 }
 
 .welcome-text {
