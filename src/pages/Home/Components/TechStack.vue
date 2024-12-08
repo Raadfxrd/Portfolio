@@ -28,17 +28,6 @@ const { techStack } = useTechStack()
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
-/* Left fade mask */
-.tech-stack-container::before,
-.tech-stack-container::after {
-  content: '';
-  position: absolute;
-  top: 0;
-  width: 150px;
-  height: 100%;
-  z-index: 2;
-}
-
 .tech-stack {
   display: flex;
   width: max-content;
