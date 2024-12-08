@@ -25,7 +25,7 @@ const { techStack } = useTechStack()
   margin: 2rem auto;
   padding: 1.5rem 0;
   position: relative;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 0 20px rgba(1, 1, 1, 0.5);
 }
 
 .tech-stack {

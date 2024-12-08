@@ -7,9 +7,12 @@
 
 body {
   font-family: var(--font);
-  font-weight: lighter;
-  background-color: var(--color-primary-dark);
+  font-weight: 500;
   color: var(--color-primary-light);
+}
+
+.body-bg {
+  background-color: var(--color-primary-dark);
 }
 
 h1 {
@@ -29,6 +32,7 @@ h3 {
 
 strong {
   color: var(--color-secondary-light);
+  cursor: pointer;
 }
 
 p {
@@ -43,4 +47,28 @@ a {
   color: var(--color-primary-light);
   text-decoration: none;
   font-size: 1.2rem;
+}
+
+.dark-overlay {
+  background-color: rgb(24, 24, 24);
+  color: rgba(255, 255, 255, 0.5) !important;
+  transition:
+    background-color 0.5s ease-in-out,
+    color 0.5s ease-in-out;
+}
+
+.dark-overlay strong {
+  color: rgba(255, 255, 255, 0.5);
+}
+
+.dark-overlay a,
+.dark-overlay p,
+.dark-overlay li,
+.dark-overlay h1,
+.dark-overlay h2,
+.dark-overlay h3,
+.dark-overlay img,
+.dark-overlay div {
+  color: rgba(255, 255, 255, 0.5) !important;
+  border-color: rgba(255, 255, 255, 0.5) !important;
 }
