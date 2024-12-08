@@ -39,9 +39,17 @@ onMounted(() => {
   justify-content: center;
   align-items: center;
   flex-direction: row;
-  height: calc(100vh - 160px);
+  height: calc(100vh - 80px);
   opacity: 0;
   animation: fadeIn 1s forwards;
+}
+
+.welcome-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  max-width: 100vw;
 }
 
 .welcome-content {
@@ -49,7 +57,8 @@ onMounted(() => {
   justify-content: center;
   align-items: center;
   flex-direction: row;
-  gap: 3rem;
+  gap: 10rem;
+  width: 100%;
 }
 
 .welcome-text {

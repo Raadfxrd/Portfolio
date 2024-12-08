@@ -7,10 +7,9 @@
 
 body {
   font-family: var(--font);
-  letter-spacing: 5px;
+  font-weight: lighter;
   background-color: var(--color-primary-dark);
   color: var(--color-primary-light);
-  overflow: hidden;
 }
 
 h1 {
@@ -30,11 +29,14 @@ h3 {
 
 strong {
   color: var(--color-secondary-light);
-  font-weight: bold;
 }
 
 p {
-  font-size: 1.2rem;
+  font-size: 1.1rem;
+}
+
+li {
+  font-size: 1.1rem;
 }
 
 a {
