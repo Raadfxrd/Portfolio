@@ -113,8 +113,10 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 
+// State to track the highlighted interest
 const highlightedInterest = ref('')
 
+// Function to highlight the interest and change the body class
 function highlight(interest: string) {
   highlightedInterest.value = interest
 

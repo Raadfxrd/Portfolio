@@ -25,9 +25,12 @@ import { useGreeting } from '@/composables/useGreeting'
 import { useRotatingTitles } from '@/composables/useRotatingTitles'
 import TechStack from './TechStack.vue'
 
+// Get greeting message
 const { greeting } = useGreeting()
+// Get rotating titles and control functions
 const { currentTitle, isFadingOut, startTitleRotation } = useRotatingTitles()
 
+// Start rotating titles when the component is mounted
 onMounted(() => {
   startTitleRotation()
 })

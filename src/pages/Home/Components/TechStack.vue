@@ -14,6 +14,7 @@
 <script setup lang="ts">
 import { useTechStack } from '@/composables/useTechStack'
 
+// Get the tech stack data
 const { techStack } = useTechStack()
 </script>
 

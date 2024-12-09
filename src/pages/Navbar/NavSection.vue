@@ -1,8 +1,8 @@
 <template>
   <nav>
-    <div class="logo" @click="toggleLogo">
+    <div class="logo">
       <span class="logo-r">R</span>
-      <span class="logo-rest" :class="{ hidden: !isHidden }">aadfxrd</span>
+      <span class="logo-rest">aadfxrd</span>
     </div>
     <div class="nav-buttons">
       <a @click="scrollToSection('about')"> About </a>
@@ -15,16 +15,9 @@
 <script lang="ts">
 export default {
   name: 'NavSection',
-  data() {
-    return {
-      isHidden: true,
-    }
-  },
   methods: {
-    toggleLogo() {
-      this.isHidden = !this.isHidden
-    },
     scrollToSection(sectionClass: string) {
+      // Scroll to the specified section smoothly
       const element = document.querySelector(`.${sectionClass}`)
       if (element) {
         element.scrollIntoView({ behavior: 'smooth' })
@@ -45,12 +38,18 @@ nav {
 .logo {
   font-size: 2rem;
   overflow: hidden;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.logo:hover .logo-rest {
+  transform: translateX(0);
+  opacity: 1;
 }
 
 .logo-r {
   font-size: 3rem;
   font-weight: 900;
-  cursor: pointer;
 }
 
 .logo-rest {
@@ -61,11 +60,6 @@ nav {
   transform: translateX(-100%);
   opacity: 0;
   font-size: 2rem;
-}
-
-.logo-rest.hidden {
-  transform: translateX(0);
-  opacity: 1;
 }
 
 .nav-buttons {
