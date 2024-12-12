@@ -1,6 +1,15 @@
-# De Elektraman
+# Raadfxrd's Next Gen Portfolio
 
-This template should help get you started developing with Vue 3 in Vite.
+This repository contains the source code for Raadfxrd's next-generation portfolio. The portfolio is built using Vue 3 and Vite, showcasing various projects, skills, and personal information.
+
+## Table of Contents
+
+- [Recommended IDE Setup](#recommended-ide-setup)
+- [Type Support for `.vue` Imports in TS](#type-support-for-vue-imports-in-ts)
+- [Customize Configuration](#customize-configuration)
+- [Project Setup](#project-setup)
+- [Folder Structure](#folder-structure)
+- [Scripts](#scripts)
 
 ## Recommended IDE Setup
 
@@ -10,30 +19,82 @@ This template should help get you started developing with Vue 3 in Vite.
 
 TypeScript cannot handle type information for `.vue` imports by default, so we replace the `tsc` CLI with `vue-tsc` for type checking. In editors, we need [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) to make the TypeScript language service aware of `.vue` types.
 
-## Customize configuration
+## Customize Configuration
 
 See [Vite Configuration Reference](https://vite.dev/config/).
 
 ## Project Setup
 
-```sh
-npm install
+`npm install`
+
+## Compile and Hot-Reload for Development
+
+`npm run dev`
+
+## Type-Check, Compile and Minify for production
+
+`npm run build`
+
+## Lint with ESLint
+
+`npm run lint`
+
+## Folder structure
+
+```
+.DS_Store
+.editorconfig
+.gitignore
+.prettierrc.json
+.vscode/
+├── extensions.json
+├── settings.json
+composer.json
+composer.lock
+env.d.ts
+eslint.config.js
+index.html
+package.json
+public/
+README.md
+src/
+├── .DS_Store
+├── App.vue
+├── assets/
+│   ├── img/
+│   ├── main.css
+│   └── reset.css
+├── composables/
+│   ├── useGreeting.ts
+│   ├── useRotatingTitles.ts
+│   └── useTechStack.ts
+├── main.ts
+├── pages/
+│   ├── Home/
+│   ├── Components/
+│   │   ├── WelcomeComponent.vue
+│   │   ├── TechStack.vue
+│   ├── About/
+│   │   ├── AboutSection.vue
+├── sendEmail.php
+└── shims-vue.d.ts
+tsconfig.app.json
+tsconfig.json
+tsconfig.node.json
+vendor/
+├── autoload.php
+├── composer/
+├── graham-campbell/
+├── phpmailer/
+├── phpoption/
+├── symfony/
+└── vlucas/
+vite.config.ts
 ```
 
-### Compile and Hot-Reload for Development
+## Scripts
 
-```sh
-npm run dev
-```
-
-### Type-Check, Compile and Minify for Production
-
-```sh
-npm run build
-```
-
-### Lint with [ESLint](https://eslint.org/)
-
-```sh
-npm run lint
-```
+- `npm install`: Install project dependencies.
+- `npm run dev`: Compile and hot-reload for development.
+- `npm run build`: Type-check, compile, and minify for production.
+- `npm run lint`: Lint the project with ESLint.
