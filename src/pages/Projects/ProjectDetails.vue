@@ -72,7 +72,7 @@ export default defineComponent({
                 Authorization: `token ${GITHUB_TOKEN}`,
               },
               params: {
-                per_page: 100, // Fetch up to 100 commits per page
+                per_page: 1000,
                 page: page,
               },
             },
