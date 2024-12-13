@@ -258,10 +258,6 @@ function highlight(interest: string) {
   margin-top: 0.5rem;
 }
 
-.dark-overlay .about-title {
-  color: rgba(255, 255, 255, 0.5);
-}
-
 .highlighted {
   color: var(--color-primary-light) !important;
 }

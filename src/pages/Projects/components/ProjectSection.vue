@@ -8,7 +8,11 @@
         class="project"
         @click="goToProjectDetail(project)"
       >
-        <img :src="project.thumbnail || project.owner.avatar_url" :alt="project.name" />
+        <img
+          class="project-img"
+          :src="project.thumbnail || project.owner.avatar_url"
+          :alt="project.name"
+        />
         <h3>{{ project.name }}</h3>
         <p class="description">{{ project.description }}</p>
       </div>
@@ -145,7 +149,7 @@ export default defineComponent({
   transform: scale(1.05);
 }
 
-.project img {
+.project-img {
   width: 100%;
   border-radius: 20px;
   object-fit: cover;
