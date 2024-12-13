@@ -17,17 +17,7 @@
         <p class="description">{{ project.description }}</p>
       </div>
     </transition-group>
-    <div class="pagination">
-      <div class="dots">
-        <span
-          v-for="page in totalPages"
-          :key="page"
-          :class="{ active: currentPage === page }"
-          class="dot"
-          @click="goToPage(page)"
-        ></span>
-      </div>
-    </div>
+    <div v-if="loading" class="loader"></div>
   </section>
 </template>
 
@@ -44,6 +34,7 @@ export default defineComponent({
       projects: [],
       currentPage: 1,
       projectsPerPage: 4,
+      loading: false,
     }
   },
   computed: {
@@ -67,6 +58,7 @@ export default defineComponent({
   },
   methods: {
     async fetchProjects() {
+      this.loading = true
       try {
         const response = await axios.get('https://api.github.com/users/Raadfxrd/repos')
         const projects = response.data
@@ -94,6 +86,8 @@ export default defineComponent({
         this.projects = projects
       } catch (error) {
         console.error('Error fetching projects:', error)
+      } finally {
+        this.loading = false
       }
     },
     goToPage(page: number) {
@@ -142,7 +136,7 @@ export default defineComponent({
   flex-direction: column;
   transition: transform 0.3s ease;
   cursor: pointer;
-  height: 300px;
+  height: 250px;
 }
 
 .project:hover {
@@ -163,7 +157,6 @@ export default defineComponent({
 }
 
 .project .description {
-  margin: 10px 0;
   display: -webkit-box;
   -webkit-line-clamp: 2;
   line-clamp: 2;
@@ -181,36 +174,80 @@ export default defineComponent({
   text-decoration: underline;
 }
 
-.pagination {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 100px;
-  margin-top: 20px;
-  padding: 10px;
-  border-radius: 10px;
-  box-shadow: 5px 5px 15px 5px rgba(0, 0, 0, 0.3);
-}
-
-.pagination .dots {
-  display: flex;
-  align-items: center;
-  justify-content: space-evenly;
-  width: 100%;
-}
-
-.pagination .dot {
-  width: 10px;
-  height: 10px;
-  margin: 0 5px;
+/* Spinner styles */
+.loader {
+  transform: rotateZ(45deg);
+  perspective: 1000px;
   border-radius: 50%;
-  background-color: var(--color-secondary-dark);
-  transition: background-color 0.3s ease;
-  cursor: pointer;
+  width: 48px;
+  height: 48px;
+  color: var(--color-secondary-light);
 }
 
-.pagination .dot.active {
-  background-color: var(--color-secondary-light);
+.loader:before,
+.loader:after {
+  content: '';
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: inherit;
+  height: inherit;
+  border-radius: 50%;
+  transform: rotateX(70deg);
+  animation: 1s spin linear infinite;
+}
+
+.loader:after {
+  color: var(--color-primary-light);
+  transform: rotateY(70deg);
+  animation-delay: 0.4s;
+}
+
+@keyframes rotate {
+  0% {
+    transform: translate(-50%, -50%) rotateZ(0deg);
+  }
+  100% {
+    transform: translate(-50%, -50%) rotateZ(360deg);
+  }
+}
+
+@keyframes rotateccw {
+  0% {
+    transform: translate(-50%, -50%) rotate(0deg);
+  }
+  100% {
+    transform: translate(-50%, -50%) rotate(-360deg);
+  }
+}
+
+@keyframes spin {
+  0%,
+  100% {
+    box-shadow: 0.2em 0px 0 0px currentcolor;
+  }
+  12% {
+    box-shadow: 0.2em 0.2em 0 0 currentcolor;
+  }
+  25% {
+    box-shadow: 0 0.2em 0 0px currentcolor;
+  }
+  37% {
+    box-shadow: -0.2em 0.2em 0 0 currentcolor;
+  }
+  50% {
+    box-shadow: -0.2em 0 0 0 currentcolor;
+  }
+  62% {
+    box-shadow: -0.2em -0.2em 0 0 currentcolor;
+  }
+  75% {
+    box-shadow: 0px -0.2em 0 0 currentcolor;
+  }
+  87% {
+    box-shadow: 0.2em -0.2em 0 0 currentcolor;
+  }
 }
 
 /* Transition classes for fade effect */
