@@ -2,16 +2,27 @@
   <section class="project-section">
     <h2>My Projects</h2>
     <div class="projects">
-      <div v-for="project in paginatedProjects" :key="project.id" class="project">
-        <img :src="project.owner.avatar_url" :alt="project.name" />
+      <div
+        v-for="project in paginatedProjects"
+        :key="project.id"
+        class="project"
+        @click="goToProjectDetail(project)"
+      >
+        <img :src="project.thumbnail || project.owner.avatar_url" :alt="project.name" />
         <h3>{{ project.name }}</h3>
-        <p>{{ project.description }}</p>
-        <a :href="project.html_url" target="_blank">View on GitHub</a>
+        <p class="description">{{ project.description }}</p>
       </div>
     </div>
     <div class="pagination">
-      <button @click="prevPage" :disabled="currentPage === 1">Previous</button>
-      <button @click="nextPage" :disabled="currentPage === totalPages">Next</button>
+      <div class="dots">
+        <span
+          v-for="page in totalPages"
+          :key="page"
+          :class="{ active: currentPage === page }"
+          class="dot"
+          @click="goToPage(page)"
+        ></span>
+      </div>
     </div>
   </section>
 </template>
@@ -30,16 +41,22 @@ export default defineComponent({
     }
   },
   computed: {
-    filteredProjects() {
+    ownProjects() {
+      return this.projects.filter((project) => !project.name.includes('-school'))
+    },
+    schoolProjects() {
       return this.projects.filter((project) => project.name.includes('-school'))
     },
+    combinedProjects() {
+      return [...this.ownProjects, ...this.schoolProjects]
+    },
     totalPages() {
-      return Math.ceil(this.filteredProjects.length / this.projectsPerPage)
+      return Math.ceil(this.combinedProjects.length / this.projectsPerPage)
     },
     paginatedProjects() {
       const start = (this.currentPage - 1) * this.projectsPerPage
       const end = start + this.projectsPerPage
-      return this.filteredProjects.slice(start, end)
+      return this.combinedProjects.slice(start, end)
     },
   },
   mounted() {
@@ -49,20 +66,35 @@ export default defineComponent({
     async fetchProjects() {
       try {
         const response = await axios.get('https://api.github.com/users/Raadfxrd/repos')
-        this.projects = response.data
+        const projects = response.data
+
+        for (const project of projects) {
+          try {
+            const readmeResponse = await axios.get(
+              `https://api.github.com/repos/Raadfxrd/${project.name}/readme`,
+              {
+                headers: { Accept: 'application/vnd.github.v3.raw' },
+              },
+            )
+            const readmeContent = readmeResponse.data
+            const thumbnailMatch = readmeContent.match(/!\[.*\]\((.*)\)/)
+            project.thumbnail = thumbnailMatch ? thumbnailMatch[1] : null
+          } catch (error) {
+            console.error(`Error fetching README for ${project.name}:`, error)
+            project.thumbnail = null
+          }
+        }
+
+        this.projects = projects
       } catch (error) {
         console.error('Error fetching projects:', error)
       }
     },
-    nextPage() {
-      if (this.currentPage < this.totalPages) {
-        this.currentPage++
-      }
+    goToPage(page: number) {
+      this.currentPage = page
     },
-    prevPage() {
-      if (this.currentPage > 1) {
-        this.currentPage--
-      }
+    goToProjectDetail(project) {
+      this.$router.push({ name: 'ProjectDetail', params: { projectId: project.name } })
     },
   },
 })
@@ -77,10 +109,11 @@ export default defineComponent({
   animation: fadeIn 1s forwards;
   height: 100vh;
   width: 100vw;
+  margin-bottom: 50px;
 }
 
 .project-section h2 {
-  margin-bottom: 50px;
+  margin-bottom: 30px;
   color: var(--primary-color);
 }
 
@@ -98,6 +131,16 @@ export default defineComponent({
   box-shadow: 5px 5px 15px 5px rgba(0, 0, 0, 0.3);
   display: flex;
   flex-direction: column;
+  transition:
+    transform 0.3s ease,
+    box-shadow 0.3s ease;
+  cursor: pointer;
+  height: 300px;
+}
+
+.project:hover {
+  transform: translateY(-10px);
+  box-shadow: 10px 10px 20px rgba(0, 0, 0, 0.3);
 }
 
 .project img {
@@ -113,8 +156,14 @@ export default defineComponent({
   color: var(--primary-color);
 }
 
-.project p {
+.project .description {
   margin: 10px 0;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .project a {
@@ -129,20 +178,32 @@ export default defineComponent({
 .pagination {
   display: flex;
   justify-content: center;
+  align-items: center;
+  width: 100px;
   margin-top: 20px;
+  padding: 10px;
+  border-radius: 10px;
+  box-shadow: 5px 5px 15px 5px rgba(0, 0, 0, 0.3);
 }
 
-.pagination button {
-  margin: 0 10px;
-  padding: 10px 20px;
-  border: none;
-  background-color: var(--primary-color);
-  color: white;
+.pagination .dots {
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  width: 100%;
+}
+
+.pagination .dot {
+  width: 10px;
+  height: 10px;
+  margin: 0 5px;
+  border-radius: 50%;
+  background-color: var(--color-secondary-dark);
+  transition: background-color 0.3s ease;
   cursor: pointer;
 }
 
-.pagination button:disabled {
-  background-color: #ccc;
-  cursor: not-allowed;
+.pagination .dot.active {
+  background-color: var(--color-secondary-light);
 }
 </style>
