@@ -142,8 +142,8 @@ export default defineComponent({
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 20px;
-  height: calc(100vh - 50px);
+  padding: 30px;
+  height: calc(100vh - 60px);
 }
 
 .content-container {
@@ -177,6 +177,7 @@ export default defineComponent({
   width: 100%;
   border-radius: 20px;
   object-fit: cover;
+  border: 2px solid var(--color-primary-light);
 }
 
 .avatar-bubble {
@@ -187,7 +188,7 @@ export default defineComponent({
   height: 50px;
   border-radius: 50%;
   overflow: hidden;
-  border: 2px solid var(--color-primary-light);
+  border: 2px solid var(--color-secondary-light);
   background-color: var(--color-primary-dark);
 }
 
@@ -213,7 +214,7 @@ export default defineComponent({
 
 .project-details h2 {
   margin-bottom: 20px;
-  color: var(--primary-color);
+  color: var(--color-secondary-light);
 }
 
 .project-detais p {
