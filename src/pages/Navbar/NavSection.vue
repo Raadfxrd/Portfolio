@@ -1,19 +1,19 @@
 <template>
   <nav>
-    <div class="logo">
-      <span class="logo-r" @click="goHome">R</span>
-      <span class="logo-rest" @click="goHome">aadfxrd</span>
+    <div class="logo" @click="goHome">
+      <span class="logo-r">R</span>
+      <span class="logo-rest">aadfxrd</span>
     </div>
     <div class="nav-buttons">
-      <a @click="scrollToSection('about')"> About </a>
-      <a @click="scrollToSection('project-section')"> Projects </a>
+      <a @click="navigateAndScroll('about')"> About </a>
+      <a @click="navigateAndScroll('project-section')"> Projects </a>
       <a> Contact </a>
     </div>
   </nav>
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue'
+import { defineComponent, nextTick } from 'vue'
 
 export default defineComponent({
   name: 'NavSection',
@@ -27,6 +27,17 @@ export default defineComponent({
     },
     goHome() {
       this.$router.push('/')
+    },
+    navigateAndScroll(sectionClass: string) {
+      if (this.$route.path !== '/') {
+        this.$router.push('/').then(() => {
+          nextTick(() => {
+            this.scrollToSection(sectionClass)
+          })
+        })
+      } else {
+        this.scrollToSection(sectionClass)
+      }
     },
   },
 })
