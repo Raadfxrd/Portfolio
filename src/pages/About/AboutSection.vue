@@ -6,44 +6,96 @@
           <h2 class="about-title">About Me</h2>
           <p class="about-description">
             Hi there! I'm a
-            <strong @mouseover="highlight('age')" @mouseleave="highlight('')">21-year</strong> old
-            <strong @mouseover="highlight('hometown')" @mouseleave="highlight('')">Polish</strong>
+            <strong
+              class="strong-mouseover"
+              @mouseover="highlight('age')"
+              @mouseleave="highlight('')"
+              >21-year</strong
+            >
+            old
+            <strong
+              class="strong-mouseover"
+              @mouseover="highlight('hometown')"
+              @mouseleave="highlight('')"
+              >Polish</strong
+            >
             student at the
-            <strong @mouseover="highlight('education')" @mouseleave="highlight('')"
+            <strong
+              class="strong-mouseover"
+              @mouseover="highlight('education')"
+              @mouseleave="highlight('')"
               >Amsterdam University of Applied Sciences (AUAS)</strong
             >, pursuing a career in
-            <strong @mouseover="highlight('education')" @mouseleave="highlight('')"
+            <strong
+              class="strong-mouseover"
+              @mouseover="highlight('education')"
+              @mouseleave="highlight('')"
               >Software Engineering</strong
             >. I'm mostly
-            <strong @mouseover="highlight('experience')" @mouseleave="highlight('')"
+            <strong
+              class="strong-mouseover"
+              @mouseover="highlight('experience')"
+              @mouseleave="highlight('')"
               >self-taught</strong
             >, with the majority of my projects being school-related, but I often challenge myself
             to create personal projects for fun or as gifts for friends and family.
           </p>
           <p class="about-description">
             I also work in the
-            <strong @mouseover="highlight('work')" @mouseleave="highlight('')"
+            <strong
+              class="strong-mouseover"
+              @mouseover="highlight('work')"
+              @mouseleave="highlight('')"
               >audiophile industry</strong
             >, where I sell speakers, explore great music, and share fun moments with my colleagues.
             It's a job that combines my love for technology and my passion for high-quality sound.
           </p>
           <p class="about-description">
             When I'm not studying or working, I unwind by
-            <strong @mouseover="highlight('gaming')" @mouseleave="highlight('')">gaming</strong>.
-            You'll often find me immersed in
-            <strong @mouseover="highlight('gaming')" @mouseleave="highlight('')">Valorant</strong>,
-            <strong @mouseover="highlight('gaming')" @mouseleave="highlight('')">Minecraft</strong>,
-            or<strong @mouseover="highlight('gaming')" @mouseleave="highlight('')">
+            <strong
+              class="strong-mouseover"
+              @mouseover="highlight('gaming')"
+              @mouseleave="highlight('')"
+              >gaming</strong
+            >. You'll often find me immersed in
+            <strong
+              class="strong-mouseover"
+              @mouseover="highlight('gaming')"
+              @mouseleave="highlight('')"
+              >Valorant</strong
+            >,
+            <strong
+              class="strong-mouseover"
+              @mouseover="highlight('gaming')"
+              @mouseleave="highlight('')"
+              >Minecraft</strong
+            >, or<strong
+              class="strong-mouseover"
+              @mouseover="highlight('gaming')"
+              @mouseleave="highlight('')"
+            >
               Black Desert Online</strong
             >, though I enjoy exploring a wide variety of games.
           </p>
           <p class="about-description">
             In my downtime, I'm passionate about tinkering with
-            <strong @mouseover="highlight('tech')" @mouseleave="highlight('')">home tech</strong>
+            <strong
+              class="strong-mouseover"
+              @mouseover="highlight('tech')"
+              @mouseleave="highlight('')"
+              >home tech</strong
+            >
             and experimenting with different
-            <strong @mouseover="highlight('tech')" @mouseleave="highlight('')">hardware</strong>. I
-            particularly enjoy fine-tuning my PC setup and diving into the world of
-            <strong @mouseover="highlight('keyboards')" @mouseleave="highlight('')"
+            <strong
+              class="strong-mouseover"
+              @mouseover="highlight('tech')"
+              @mouseleave="highlight('')"
+              >hardware</strong
+            >. I particularly enjoy fine-tuning my PC setup and diving into the world of
+            <strong
+              class="strong-mouseover"
+              @mouseover="highlight('keyboards')"
+              @mouseleave="highlight('')"
               >mechanical keyboards</strong
             >. The design freedom, tactile feel, and satisfying sound of custom keyboards are a
             never-ending fascination for me.
