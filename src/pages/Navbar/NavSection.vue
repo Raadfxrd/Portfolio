@@ -1,19 +1,21 @@
 <template>
   <nav>
     <div class="logo">
-      <span class="logo-r">R</span>
-      <span class="logo-rest">aadfxrd</span>
+      <span class="logo-r" @click="goHome">R</span>
+      <span class="logo-rest" @click="goHome">aadfxrd</span>
     </div>
     <div class="nav-buttons">
       <a @click="scrollToSection('about')"> About </a>
-      <a> Projects </a>
+      <a @click="scrollToSection('project-section')"> Projects </a>
       <a> Contact </a>
     </div>
   </nav>
 </template>
 
 <script lang="ts">
-export default {
+import { defineComponent } from 'vue'
+
+export default defineComponent({
   name: 'NavSection',
   methods: {
     scrollToSection(sectionClass: string) {
@@ -23,8 +25,11 @@ export default {
         element.scrollIntoView({ behavior: 'smooth' })
       }
     },
+    goHome() {
+      this.$router.push('/')
+    },
   },
-}
+})
 </script>
 
 <style scoped>
@@ -33,6 +38,7 @@ nav {
   justify-content: space-between;
   align-items: center;
   padding: 2rem 2rem 0 2rem;
+  background-color: var(--color-primary-dark);
 }
 
 .logo {
