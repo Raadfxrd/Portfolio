@@ -1,6 +1,6 @@
 <template>
   <nav>
-    <div class="logo" @click="goHome">
+    <div class="logo" @click="navigateAndScroll('welcome')">
       <span class="logo-r">R</span>
       <span class="logo-rest">aadfxrd</span>
     </div>

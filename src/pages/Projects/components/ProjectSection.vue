@@ -17,6 +17,17 @@
         <p class="description">{{ project.description }}</p>
       </div>
     </transition-group>
+    <div v-if="!loading" class="pagination">
+      <div class="dots">
+        <span
+          v-for="page in totalPages"
+          :key="page"
+          :class="{ active: currentPage === page }"
+          class="dot"
+          @click="goToPage(page)"
+        ></span>
+      </div>
+    </div>
     <div v-if="loading" class="loader"></div>
   </section>
 </template>
@@ -110,9 +121,8 @@ export default defineComponent({
   align-items: center;
   flex-direction: column;
   animation: fadeIn 1s forwards;
-  height: 100vh;
+  height: calc(100vh - 40px);
   width: 100vw;
-  margin-bottom: 50px;
 }
 
 .project-section h2 {
@@ -172,6 +182,38 @@ export default defineComponent({
 
 .project a:hover {
   text-decoration: underline;
+}
+
+.pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20px;
+  width: 100px;
+  padding: 10px;
+  border-radius: 10px;
+  box-shadow: 5px 5px 15px 5px rgba(0, 0, 0, 0.3);
+}
+
+.pagination .dots {
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  width: 100%;
+}
+
+.pagination .dot {
+  width: 10px;
+  height: 10px;
+  margin: 0 5px;
+  border-radius: 50%;
+  background-color: var(--color-secondary-dark);
+  transition: background-color 0.3s ease;
+  cursor: pointer;
+}
+
+.pagination .dot.active {
+  background-color: var(--color-secondary-light);
 }
 
 /* Spinner styles */

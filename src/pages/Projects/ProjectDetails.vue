@@ -143,7 +143,7 @@ export default defineComponent({
   flex-direction: column;
   align-items: center;
   padding: 20px;
-  height: calc(100vh - 150px);
+  height: calc(100vh - 50px);
 }
 
 .content-container {
