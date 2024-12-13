@@ -1,7 +1,7 @@
 <template>
   <section class="project-section">
     <h2>My Projects</h2>
-    <div class="projects">
+    <transition-group name="fade" tag="div" class="projects">
       <div
         v-for="project in paginatedProjects"
         :key="project.id"
@@ -12,7 +12,7 @@
         <h3>{{ project.name }}</h3>
         <p class="description">{{ project.description }}</p>
       </div>
-    </div>
+    </transition-group>
     <div class="pagination">
       <div class="dots">
         <span
@@ -30,6 +30,8 @@
 <script lang="ts">
 import axios from 'axios'
 import { defineComponent } from 'vue'
+
+const GITHUB_TOKEN = import.meta.env.VITE_APP_GITHUB_TOKEN
 
 export default defineComponent({
   name: 'ProjectSection',
@@ -50,17 +52,14 @@ export default defineComponent({
     combinedProjects() {
       return [...this.ownProjects, ...this.schoolProjects]
     },
-    totalPages() {
-      return Math.ceil(this.combinedProjects.length / this.projectsPerPage)
-    },
     paginatedProjects() {
       const start = (this.currentPage - 1) * this.projectsPerPage
       const end = start + this.projectsPerPage
       return this.combinedProjects.slice(start, end)
     },
-  },
-  mounted() {
-    this.fetchProjects()
+    totalPages() {
+      return Math.ceil(this.combinedProjects.length / this.projectsPerPage)
+    },
   },
   methods: {
     async fetchProjects() {
@@ -73,7 +72,10 @@ export default defineComponent({
             const readmeResponse = await axios.get(
               `https://api.github.com/repos/Raadfxrd/${project.name}/readme`,
               {
-                headers: { Accept: 'application/vnd.github.v3.raw' },
+                headers: {
+                  Accept: 'application/vnd.github.v3.raw',
+                  Authorization: `token ${GITHUB_TOKEN}`,
+                },
               },
             )
             const readmeContent = readmeResponse.data
@@ -96,6 +98,9 @@ export default defineComponent({
     goToProjectDetail(project) {
       this.$router.push({ name: 'ProjectDetail', params: { projectId: project.name } })
     },
+  },
+  async created() {
+    await this.fetchProjects()
   },
 })
 </script>
@@ -131,16 +136,13 @@ export default defineComponent({
   box-shadow: 5px 5px 15px 5px rgba(0, 0, 0, 0.3);
   display: flex;
   flex-direction: column;
-  transition:
-    transform 0.3s ease,
-    box-shadow 0.3s ease;
+  transition: transform 0.3s ease;
   cursor: pointer;
   height: 300px;
 }
 
 .project:hover {
-  transform: translateY(-10px);
-  box-shadow: 10px 10px 20px rgba(0, 0, 0, 0.3);
+  transform: scale(1.05);
 }
 
 .project img {
@@ -205,5 +207,23 @@ export default defineComponent({
 
 .pagination .dot.active {
   background-color: var(--color-secondary-light);
+}
+
+/* Transition classes for fade effect */
+.fade-enter-active,
+.fade-leave-active {
+  animation: fadeIn 1s forwards;
+}
+.fade-enter, .fade-leave-to /* .fade-leave-active in <2.1.8 */ {
+  opacity: 0;
+}
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
 }
 </style>
