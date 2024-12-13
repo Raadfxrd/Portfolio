@@ -1,10 +1,14 @@
 <template>
   <NavSection></NavSection>
-  <section class="project-detail" v-if="project">
+  <section class="project-details" v-if="project">
     <div class="content-container">
       <div class="image-and-description">
         <div class="image-container">
-          <img :src="project.thumbnail || project.owner.avatar_url" :alt="project.name" />
+          <img
+            class="project-details-img"
+            :src="project.thumbnail || project.owner.avatar_url"
+            :alt="project.name"
+          />
           <div class="avatar-bubble">
             <img :src="project.owner.avatar_url" alt="Owner Avatar" />
           </div>
@@ -54,6 +58,40 @@ export default defineComponent({
       const date = new Date(dateString)
       return `${date.toLocaleDateString()} at ${date.toLocaleTimeString()}`
     },
+    async fetchAllCommits() {
+      let page = 1
+      let allCommits = []
+      let hasMoreCommits = true
+
+      while (hasMoreCommits) {
+        try {
+          const commitsResponse = await axios.get(
+            `https://api.github.com/repos/Raadfxrd/${this.project.name}/commits`,
+            {
+              headers: {
+                Authorization: `token ${GITHUB_TOKEN}`,
+              },
+              params: {
+                per_page: 100, // Fetch up to 100 commits per page
+                page: page,
+              },
+            },
+          )
+          const commits = commitsResponse.data
+          allCommits = allCommits.concat(commits)
+          if (commits.length < 100) {
+            hasMoreCommits = false
+          } else {
+            page++
+          }
+        } catch (error) {
+          console.error('Error fetching commits:', error)
+          hasMoreCommits = false
+        }
+      }
+
+      return allCommits
+    },
   },
   async created() {
     const projectId = this.$route.params.projectId
@@ -87,15 +125,8 @@ export default defineComponent({
 
       try {
         console.log('Fetching commits for project:', this.project.name)
-        const commitsResponse = await axios.get(
-          `https://api.github.com/repos/Raadfxrd/${this.project.name}/commits`,
-          {
-            headers: {
-              Authorization: `token ${GITHUB_TOKEN}`,
-            },
-          },
-        )
-        this.commitsCount = commitsResponse.data.length
+        const allCommits = await this.fetchAllCommits()
+        this.commitsCount = allCommits.length
       } catch (error) {
         console.error('Error fetching commits:', error)
       }
@@ -107,18 +138,21 @@ export default defineComponent({
 </script>
 
 <style scoped>
-.project-detail {
+.project-details {
   display: flex;
   flex-direction: column;
   align-items: center;
   padding: 20px;
+  height: calc(100vh - 150px);
 }
 
 .content-container {
   display: flex;
   align-items: flex-start;
   justify-content: center;
+  justify-content: space-around;
   width: 100%;
+  height: 100%;
   max-width: 1200px;
   position: relative;
 }
@@ -127,7 +161,9 @@ export default defineComponent({
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: space-evenly;
   width: 70%;
+  height: 100%;
 }
 
 .image-container {
@@ -137,9 +173,10 @@ export default defineComponent({
   margin-bottom: 20px;
 }
 
-.project-detail img {
+.project-details-img {
   width: 100%;
   border-radius: 20px;
+  object-fit: cover;
 }
 
 .avatar-bubble {
@@ -174,12 +211,12 @@ export default defineComponent({
   z-index: -1;
 }
 
-.project-detail h2 {
+.project-details h2 {
   margin-bottom: 20px;
   color: var(--primary-color);
 }
 
-.project-detail p {
+.project-detais p {
   margin-bottom: 20px;
   width: 600px;
 }
@@ -194,12 +231,12 @@ export default defineComponent({
   margin-bottom: 10px;
 }
 
-.project-detail a {
+.project-details a {
   color: var(--color-secondary-light);
   text-decoration: none;
 }
 
-.project-detail a:hover {
+.project-details a:hover {
   text-decoration: underline;
 }
 

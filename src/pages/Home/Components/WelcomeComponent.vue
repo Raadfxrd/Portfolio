@@ -42,7 +42,7 @@ onMounted(() => {
   justify-content: center;
   align-items: center;
   flex-direction: row;
-  height: calc(100vh - 80px);
+  height: 100vh;
   opacity: 0;
   animation: fadeIn 1s forwards;
 }
