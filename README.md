@@ -1,5 +1,7 @@
 # Raadfxrd's Next Gen Portfolio
 
+![Thumbnail](/src/assets/img/thumbnail.png)
+
 This repository contains the source code for Raadfxrd's next-generation portfolio. The portfolio is built using Vue 3 and Vite, showcasing various projects, skills, and personal information.
 
 ## Table of Contents
