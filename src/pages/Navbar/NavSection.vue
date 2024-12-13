@@ -50,6 +50,9 @@ nav {
   align-items: center;
   padding: 2rem 2rem 0 2rem;
   background-color: var(--color-primary-dark);
+  position: fixed;
+  width: -moz-available;
+  z-index: 1;
 }
 
 .logo {
