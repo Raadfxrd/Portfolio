@@ -1,7 +1,9 @@
 :root {
   --color-primary-dark: #132534;
+  --color-secondary-dark: #1d3351;
   --color-primary-light: #faa2a2;
   --color-secondary-light: #6eb1e7;
+  --button-disabled: #645151;
   --font: 'Iosevka', monospace;
 }
 
@@ -31,6 +33,10 @@ h3 {
 }
 
 strong {
+  color: var(--color-secondary-light);
+}
+
+.strong-mouseover {
   color: var(--color-secondary-light);
   cursor: pointer;
 }
