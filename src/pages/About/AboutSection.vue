@@ -134,7 +134,7 @@ function highlight(interest: string) {
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  min-height: calc(100vh - 80px);
+  min-height: 100vh;
   opacity: 0;
   animation: fadeIn 1s forwards;
   padding: 2rem;
