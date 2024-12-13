@@ -11,6 +11,7 @@ This repository contains the source code for Raadfxrd's next-generation portfoli
 - [Customize Configuration](#customize-configuration)
 - [Project Setup](#project-setup)
 - [Folder Structure](#folder-structure)
+- [References | Credits](#credits)
 - [Scripts](#scripts)
 
 ## Recommended IDE Setup
@@ -93,6 +94,10 @@ vendor/
 └── vlucas/
 vite.config.ts
 ```
+
+## Credits
+
+Big thanks to: [Vineeth TR](https://cssloaders.github.io/) for the loader <3
 
 ## Scripts
 
