@@ -178,6 +178,7 @@ export default defineComponent({
   border-radius: 20px;
   object-fit: cover;
   border: 2px solid var(--color-primary-light);
+  margin-top: 50px;
 }
 
 .avatar-bubble {
