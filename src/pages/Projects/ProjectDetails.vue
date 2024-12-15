@@ -175,6 +175,7 @@ export default defineComponent({
 
 .project-details-img {
   width: 100%;
+  max-height: 500px;
   border-radius: 20px;
   object-fit: cover;
   border: 2px solid var(--color-primary-light);

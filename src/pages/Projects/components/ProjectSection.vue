@@ -1,5 +1,5 @@
 <template>
-  <section class="project-section">
+  <section class="project-section" ref="projectSection">
     <h2>My Projects</h2>
     <transition-group name="fade" tag="div" class="projects">
       <div
@@ -34,7 +34,7 @@
 
 <script lang="ts">
 import axios from 'axios'
-import { defineComponent } from 'vue'
+import { defineComponent, nextTick } from 'vue'
 
 const GITHUB_TOKEN = import.meta.env.VITE_APP_GITHUB_TOKEN
 
@@ -106,6 +106,14 @@ export default defineComponent({
     },
     goToPage(page: number) {
       this.currentPage = page
+      nextTick(() => {
+        const projectSection = this.$refs.projectSection as HTMLElement
+        const sectionRect = projectSection.getBoundingClientRect()
+        const scrollTop = window.pageYOffset || document.documentElement.scrollTop
+        const sectionTop = sectionRect.top + scrollTop
+        const sectionMiddle = sectionTop + sectionRect.height / 2 - window.innerHeight / 2
+        window.scrollTo({ top: sectionMiddle, behavior: 'smooth' })
+      })
     },
     goToProjectDetail(project) {
       this.$router.push({ name: 'ProjectDetail', params: { projectId: project.name } })
@@ -298,18 +306,10 @@ export default defineComponent({
 /* Transition classes for fade effect */
 .fade-enter-active,
 .fade-leave-active {
-  animation: fadeIn 1s forwards;
+  transition: opacity 1s;
 }
-.fade-enter, .fade-leave-to {
+.fade-enter,
+.fade-leave-to {
   opacity: 0;
-}
-
-@keyframes fadeIn {
-  0% {
-    opacity: 0;
-  }
-  100% {
-    opacity: 1;
-  }
 }
 </style>
