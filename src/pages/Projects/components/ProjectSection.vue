@@ -85,9 +85,12 @@ export default defineComponent({
                 },
               },
             )
+
             const readmeContent = readmeResponse.data
-            const thumbnailMatch = readmeContent.match(/!\[.*\]\((.*)\)/)
-            project.thumbnail = thumbnailMatch ? thumbnailMatch[1] : null
+            // Use regex to find all markdown images
+            const imageMatches = [...readmeContent.matchAll(/!\[.*?\]\((.*?)\)/g)]
+            // Use the first match if available
+            project.thumbnail = imageMatches.length > 0 ? imageMatches[0][1] : null
           } catch (error) {
             console.error(`Error fetching README for ${project.name}:`, error)
             project.thumbnail = null
@@ -297,7 +300,7 @@ export default defineComponent({
 .fade-leave-active {
   animation: fadeIn 1s forwards;
 }
-.fade-enter, .fade-leave-to /* .fade-leave-active in <2.1.8 */ {
+.fade-enter, .fade-leave-to {
   opacity: 0;
 }
 
