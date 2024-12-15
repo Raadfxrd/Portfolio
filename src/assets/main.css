@@ -15,7 +15,7 @@ body {
 }
 
 .body-bg {
-  background-color: var(--color-primary-dark);
+  background-color: var(--color-primary-dark) !important;
 }
 
 h1 {
@@ -57,11 +57,10 @@ a {
 }
 
 .dark-overlay {
-  background-color: rgb(24, 24, 24);
+  background-color: rgb(24, 24, 24) !important;
+  border-color: rgba(255, 255, 255, 0.5) !important;
   color: rgba(255, 255, 255, 0.5) !important;
-  transition:
-    background-color 0.5s ease-in-out,
-    color 0.5s ease-in-out;
+  transition: 0.5s;
 }
 
 .dark-overlay strong {
@@ -74,8 +73,16 @@ a {
 .dark-overlay h1,
 .dark-overlay h2,
 .dark-overlay h3,
-.dark-overlay img,
-.dark-overlay div {
+.dark-overlay div,
+.dark-overlay nav {
   color: rgba(255, 255, 255, 0.5) !important;
   border-color: rgba(255, 255, 255, 0.5) !important;
+  background-color: rgb(24, 24, 24) !important;
+  transition:
+    background-color 0.5s ease-in-out,
+    color 0.5s ease-in-out;
+}
+
+.dark-overlay img {
+  filter: grayscale(1);
 }
