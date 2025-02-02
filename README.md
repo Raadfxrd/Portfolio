@@ -98,7 +98,7 @@ vite.config.ts
 
 ## Credits
 
-Big thanks to: [Vineeth TR](https://cssloaders.github.io/) for the loader <3
+Big thanks to: [Vineeth TR](https://cssloaders.github.io/) for the spinner <3
 
 ## Scripts
 

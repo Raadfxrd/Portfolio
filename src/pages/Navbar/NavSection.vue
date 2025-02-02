@@ -5,8 +5,9 @@
       <span class="logo-rest">aadfxrd</span>
     </div>
     <div class="nav-buttons">
-      <a @click="navigateAndScroll('about')"> About </a>
+      <a @click="navigateAndScroll('about-section')"> About </a>
       <a @click="navigateAndScroll('project-section')"> Projects </a>
+      <a @click="navigateAndScroll('services-section')"> Services </a>
       <a> Contact </a>
     </div>
   </nav>
@@ -59,7 +60,6 @@ nav {
   font-size: 2rem;
   overflow: hidden;
   cursor: pointer;
-  transition: all 0.3s ease;
 }
 
 .logo:hover .logo-rest {
@@ -75,8 +75,8 @@ nav {
 .logo-rest {
   display: inline-block;
   transition:
-    transform 0.3s ease,
-    opacity 0.3s ease;
+    transform var(--duration) ease-in-out,
+    opacity var(--duration) ease-in-out;
   transform: translateX(-100%);
   opacity: 0;
   font-size: 2rem;
@@ -102,7 +102,7 @@ nav {
   width: 0;
   height: 1px;
   background-color: currentColor;
-  transition: width 0.3s ease;
+  transition: width var(--duration) ease;
 }
 
 .nav-buttons a:hover::after {

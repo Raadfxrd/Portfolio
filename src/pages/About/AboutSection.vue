@@ -1,5 +1,5 @@
 <template>
-  <section class="about" :class="{ 'dark-overlay': highlightedInterest }">
+  <section class="about-section">
     <div class="about-container">
       <div class="about-content">
         <div class="about-text">
@@ -181,7 +181,7 @@ function highlight(interest: string) {
 </script>
 
 <style scoped>
-.about {
+.about-section {
   display: flex;
   justify-content: center;
   align-items: center;

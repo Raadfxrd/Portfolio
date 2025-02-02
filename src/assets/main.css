@@ -6,6 +6,7 @@
   --button-disabled: #645151;
   --grayscale: rgba(255, 255, 255, 0.5);
   --font: 'Iosevka', monospace;
+  --duration: 0.3s;
 }
 
 body {
@@ -60,11 +61,15 @@ a {
   background-color: rgb(24, 24, 24) !important;
   border-color: rgba(255, 255, 255, 0.5) !important;
   color: rgba(255, 255, 255, 0.5) !important;
-  transition: 0.5s;
+  transition:
+    background-color var(--duration) ease-in-out,
+    border-color var(--duration) ease-in-out,
+    color var(--duration) ease-in-out;
 }
 
 .dark-overlay strong {
   color: rgba(255, 255, 255, 0.5);
+  transition: color var(--duration) ease-in-out;
 }
 
 .dark-overlay a,
@@ -74,15 +79,18 @@ a {
 .dark-overlay h2,
 .dark-overlay h3,
 .dark-overlay div,
-.dark-overlay nav {
+.dark-overlay nav,
+.dark-overlay span {
   color: rgba(255, 255, 255, 0.5) !important;
   border-color: rgba(255, 255, 255, 0.5) !important;
   background-color: rgb(24, 24, 24) !important;
   transition:
-    background-color 0.5s ease-in-out,
-    color 0.5s ease-in-out;
+    background-color var(--duration) ease-in-out,
+    color var(--duration) ease-in-out,
+    border-color var(--duration) ease-in-out;
 }
 
 .dark-overlay img {
   filter: grayscale(1);
+  transition: filter var(--duration) ease-in-out;
 }

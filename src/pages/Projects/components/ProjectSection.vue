@@ -1,7 +1,7 @@
 <template>
   <section class="project-section" ref="projectSection">
     <h2>My Projects</h2>
-    <transition-group name="fade" tag="div" class="projects">
+    <div :class="['projects', { fade: isFading }]" :key="currentPage">
       <div
         v-for="project in paginatedProjects"
         :key="project.id"
@@ -16,7 +16,7 @@
         <h3>{{ project.name }}</h3>
         <p class="description">{{ project.description }}</p>
       </div>
-    </transition-group>
+    </div>
     <div v-if="!loading" class="pagination">
       <div class="dots">
         <span
@@ -46,6 +46,7 @@ export default defineComponent({
       currentPage: 1,
       projectsPerPage: 4,
       loading: false,
+      isFading: false,
     }
   },
   computed: {
@@ -105,15 +106,19 @@ export default defineComponent({
       }
     },
     goToPage(page: number) {
-      this.currentPage = page
-      nextTick(() => {
-        const projectSection = this.$refs.projectSection as HTMLElement
-        const sectionRect = projectSection.getBoundingClientRect()
-        const scrollTop = window.pageYOffset || document.documentElement.scrollTop
-        const sectionTop = sectionRect.top + scrollTop
-        const sectionMiddle = sectionTop + sectionRect.height / 2 - window.innerHeight / 2
-        window.scrollTo({ top: sectionMiddle, behavior: 'smooth' })
-      })
+      this.isFading = true
+      setTimeout(() => {
+        this.currentPage = page
+        this.isFading = false
+        nextTick(() => {
+          const projectSection = this.$refs.projectSection as HTMLElement
+          const sectionRect = projectSection.getBoundingClientRect()
+          const scrollTop = window.pageYOffset || document.documentElement.scrollTop
+          const sectionTop = sectionRect.top + scrollTop
+          const sectionMiddle = sectionTop + sectionRect.height / 2 - window.innerHeight / 2
+          window.scrollTo({ top: sectionMiddle, behavior: 'smooth' })
+        })
+      }, 300) // Match the duration of the fade transition
     },
     goToProjectDetail(project) {
       this.$router.push({ name: 'ProjectDetail', params: { projectId: project.name } })
@@ -131,7 +136,7 @@ export default defineComponent({
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  animation: fadeIn 1s forwards;
+  animation: fadeIn var(--duration) forwards;
   height: calc(100vh - 40px);
   width: 100vw;
 }
@@ -146,6 +151,12 @@ export default defineComponent({
   grid-template-columns: 1fr 1fr;
   gap: 20px 20px;
   width: 60%;
+  opacity: 1;
+  transition: opacity 0.3s ease-in-out;
+}
+
+.projects.fade {
+  opacity: 0;
 }
 
 .project {
@@ -155,7 +166,7 @@ export default defineComponent({
   box-shadow: 5px 5px 15px 5px rgba(0, 0, 0, 0.3);
   display: flex;
   flex-direction: column;
-  transition: transform 0.3s ease;
+  transition: transform var(--duration) ease;
   cursor: pointer;
   height: 250px;
 }
@@ -219,7 +230,7 @@ export default defineComponent({
   margin: 0 5px;
   border-radius: 50%;
   background-color: var(--color-secondary-dark);
-  transition: background-color 0.3s ease;
+  transition: background-color var(--duration) ease;
   cursor: pointer;
 }
 
@@ -301,15 +312,5 @@ export default defineComponent({
   87% {
     box-shadow: 0.2em -0.2em 0 0 currentcolor;
   }
-}
-
-/* Transition classes for fade effect */
-.fade-enter-active,
-.fade-leave-active {
-  transition: opacity 1s;
-}
-.fade-enter,
-.fade-leave-to {
-  opacity: 0;
 }
 </style>
