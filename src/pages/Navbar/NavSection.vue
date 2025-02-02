@@ -1,14 +1,14 @@
 <template>
   <nav>
-    <div class="logo" @click="navigateAndScroll('welcome')">
+    <div class="logo" @click="navigateAndScroll('welcome', '/')">
       <span class="logo-r">R</span>
       <span class="logo-rest">aadfxrd</span>
     </div>
     <div class="nav-buttons">
-      <a @click="navigateAndScroll('about-section')"> About </a>
-      <a @click="navigateAndScroll('project-section')"> Projects </a>
-      <a @click="navigateAndScroll('services-section')"> Services </a>
-      <a> Contact </a>
+      <a @click="navigateAndScroll('about-section', '/')"> About </a>
+      <a @click="navigateAndScroll('project-section', '/')"> Projects </a>
+      <a @click="navigateAndScroll('service-section', '/services')"> Services </a>
+      <a @click="navigateAndScroll('contact-section', '/')"> Contact </a>
     </div>
   </nav>
 </template>
@@ -26,18 +26,17 @@ export default defineComponent({
         element.scrollIntoView({ behavior: 'smooth' })
       }
     },
-    goHome() {
-      this.$router.push('/')
-    },
-    navigateAndScroll(sectionClass: string) {
-      if (this.$route.path !== '/') {
-        this.$router.push('/').then(() => {
+    navigateAndScroll(sectionClass: string, route: string) {
+      if (this.$route.path !== route) {
+        this.$router.push(route).then(() => {
           nextTick(() => {
             this.scrollToSection(sectionClass)
           })
         })
       } else {
-        this.scrollToSection(sectionClass)
+        nextTick(() => {
+          this.scrollToSection(sectionClass)
+        })
       }
     },
   },
